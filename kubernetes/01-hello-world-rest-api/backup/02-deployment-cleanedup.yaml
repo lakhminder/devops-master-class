@@ -5,10 +5,10 @@ metadata:
     app: hello-world-rest-api
   name: hello-world-rest-api
   namespace: default
-spec:
+spec: #for pods
   replicas: 3
   minReadySeconds: 45
-  selector:
+  selector: #Is used to associate pods to deployment(both shud be same)
     matchLabels:
       app: hello-world-rest-api
   strategy:
@@ -16,7 +16,7 @@ spec:
       maxSurge: 25%
       maxUnavailable: 25%
     type: RollingUpdate
-  template:
+  template:   # This is for pods
     metadata:
       labels:
         app: hello-world-rest-api
@@ -42,6 +42,6 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    app: hello-world-rest-api
+    app: hello-world-rest-api # this is used to map to pod
   sessionAffinity: None
   type: LoadBalancer
