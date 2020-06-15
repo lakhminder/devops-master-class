@@ -25,6 +25,10 @@ spec:
       - image: in28min/currency-conversion:0.0.1-RELEASE #CHANGE
         imagePullPolicy: IfNotPresent
         name: currency-conversion
+        # Env variable are auto created and passed on each service startup, i.e <SERVICE_NAME>_SERVICE_HOST with IP
+        # however the dependant service needs to be started first and no service discovery(DNS && load balancer) part
+        # for service discovery point this variable to url of http://<service-name> as below
+
         # env:
         #   - name: CURRENCY_EXCHANGE_SERVICE_HOST
         #     value: http://currency-exchange
@@ -51,4 +55,4 @@ spec:
   selector:
     app: currency-conversion
   sessionAffinity: None #CHANGE
-  type: LoadBalancer
+  type: NodePort #LoadBalancer
